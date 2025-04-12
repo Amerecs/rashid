@@ -3,6 +3,7 @@ module.exports = {
   "prefix": "بادئة البوت او برفكس",
    "staffManager": "ايدي رتبة المسوول",
     "log": "ايدي روم اللوق",
+  "category": "ايدي كاتجوري",
     "apply": {
         "desc": "وصف التقديم",
         "banner": "رابط الصورة",

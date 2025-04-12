@@ -76,7 +76,7 @@ module.exports = {
         await db.set(`application_${channel.id}`, interaction.user.id);
 
         await channel.send({
-            content: `<@${userId}>`,
+            content: `<@${userId}> | <@&${config.staffManager}>`,
             embeds: [embed],
             components: [row],
         });

@@ -1,10 +1,32 @@
 const { Events, ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder } = require("discord.js");
 const config = require("../config.js");
+const fs = require("fs");
+const path = require("path");
+const statusPath = path.join(__dirname, "../applyStatus.json");
+
+function readApplyStatus() {
+    const data = fs.readFileSync(statusPath, "utf8");
+    return JSON.parse(data).open;
+}
+
+function writeApplyStatus(newStatus) {
+    fs.writeFileSync(statusPath, JSON.stringify({ open: newStatus }, null, 2));
+}
 
 module.exports = {
     name: Events.InteractionCreate,
     async execute(client, interaction) {
         if (interaction.customId === "apply") {
+
+            const isApplyOpen = readApplyStatus();
+
+            if (!isApplyOpen) {
+                return interaction.reply({
+                    content: "التقديم مقفل حالياً.",
+                    ephemeral: true
+                });
+            }
+            
             const modal = new ModalBuilder()
                 .setCustomId("applicationModal")
                 .setTitle("Apply");

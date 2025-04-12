@@ -1,4 +1,4 @@
-const { Events, EmbedBuilder, PermissionsBitField, ActionRowBuilder, ButtonBuilder, ButtonStyle, PermissionFlagsBits } = require("discord.js");
+const { Events, EmbedBuilder, PermissionsBitField, ActionRowBuilder, ButtonBuilder, ButtonStyle, PermissionFlagsBits, ModalBuilder, TextInputBuilder, TextInputStyle } = require("discord.js");
 const QuickDB = require("quick.db");
 const db = new QuickDB.QuickDB();
 const config = require("../config.js");
@@ -139,12 +139,21 @@ embed.setDescription(`**[قبول إداري]
             }
         } else if(interaction.customId == "close"){
     
-    setTimeout(() => {
-        interaction.channel.delete();
-    }, 5000);
-    
-    interaction.reply({ content: "سوف يتم حذف التذكرة خلال 5 ثواني."})
+        const modal = new ModalBuilder()
+        .setCustomId("modall")
+        .setTitle("Close Ticket");
+        
+        const reasons = new TextInputBuilder()
+        .setCustomId("reason")
+        .setLabel("Reason")
+        .setStyle(TextInputStyle.Short)
+        .setRequired(false);
+        
+        const row = new ActionRowBuilder()
+        .addComponents(reasons);
+        
+        modal.addComponents(row);
+        await interaction.showModal(modal);
 }
-    }
     },
 };

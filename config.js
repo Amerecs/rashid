@@ -13,6 +13,8 @@ module.exports = {
         "q3": "سوال 3",
         "q4": "سوال 4",
         "q5": "سوال 5",
-        "staffAccept": "ايدي رتبة الادارة اذا انقبلو"
+        "staffAccept": "ايدي رتبة الادارة اذا انقبلو",
+      "emojiOpen": "✅",
+  "emojiClosed": "❌"
 }
 }
